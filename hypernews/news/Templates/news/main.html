@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html lang="en">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hyper News</title>
+</head>
+
+<body>
+{% regroup news|dictsortreversed:"created" by created|slice:":10" as ord_list %}
+<h2>Hyper news</h2>
+    <div class ="Form">
+        <form action="{% url 'main' %}" name="search" method="GET">
+            <table>{{ form.as_table }}</table>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+{% for date, archived_news in ord_list %}
+<h4>{{ date }}</h4>
+<ul>
+    {% for post in archived_news %}
+    <li><a href="/news/{{ post.link }}/">{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endfor %}
+
+    {% if data.q %}
+    {% if data.count == 1 %}
+        <p>{{ data.count }} result for {{ data.q }}</p>
+    {% else %}
+        <p>{{ data.count }} results for {{ data.q }}</p>
+    {% endif %}
+    {%endif%}
+    <a href="/news/create/">Create new page</a>
+
+
+
+</body>
+
+
+</html>

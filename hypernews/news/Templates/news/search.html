@@ -1,0 +1,21 @@
+<!doctype html>
+
+<html lang="en">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<body>
+    <h4>Search</h4>
+    <form action="/news/create/" method="get">
+        <label for="SEARCH">
+            SEARCH :
+            <input type="text" name="q" id="q">
+        </label>
+    </form>
+
+
+    <a href="/news/">main page</a>
+</body>
+
+</html>
